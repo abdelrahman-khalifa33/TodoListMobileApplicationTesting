@@ -23,12 +23,13 @@ public class Driver {
         options.setPlatformName("Android");
         options.setPlatformVersion("13");
         options.setAutomationName("UiAutomator2");
-        options.setApp("Downloads/ApiDemos-release.apk");
+        options.setAppPackage("com.splendapps.splendo");
+        options.setAppActivity("com.splendapps.splendo.activity.MainActivity");
         options.setDeviceName("emulator-5554");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
 
-        driver.activateApp("io.appium.android.apis");
+        driver.activateApp("com.splendapps.splendo");
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
