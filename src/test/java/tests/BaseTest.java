@@ -1,7 +1,7 @@
 package tests;
 
 import driver.Driver;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +9,7 @@ import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
 
-    protected AppiumDriver driver;
+    protected AndroidDriver driver;
     protected SoftAssert softAssert;
 
     @BeforeClass

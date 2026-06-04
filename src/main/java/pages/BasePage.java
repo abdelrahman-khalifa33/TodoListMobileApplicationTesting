@@ -17,10 +17,10 @@ import java.util.Random;
 
 public class BasePage {
 
-    static protected AppiumDriver driver;
+    static protected AndroidDriver driver;
     protected WebDriverWait wait;
 
-    public BasePage(AppiumDriver driver) {
+    public BasePage(AndroidDriver driver) {
         BasePage.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }

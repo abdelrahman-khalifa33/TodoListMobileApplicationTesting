@@ -1,7 +1,7 @@
 package tests;
 
 import driver.Driver;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class RegressionBaseTest {
 
-    protected static AppiumDriver driver;
+    protected static AndroidDriver driver;
     protected SoftAssert softAssert;
 
     private static boolean driverReady = false;
