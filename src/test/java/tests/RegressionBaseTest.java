@@ -10,7 +10,8 @@ import pages.BasePage;
 
 import java.io.IOException;
 
-public class RegressionBaseTest {
+public class
+ RegressionBaseTest {
 
     protected static AndroidDriver driver;
     protected SoftAssert softAssert;

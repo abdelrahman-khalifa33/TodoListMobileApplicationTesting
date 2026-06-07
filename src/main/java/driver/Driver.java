@@ -25,7 +25,7 @@ public class Driver {
         options.setAutomationName("UiAutomator2");
         options.setAppPackage("com.splendapps.splendo");
         options.setAppActivity("com.splendapps.splendo.activity.MainActivity");
-        options.setDeviceName("emulator-5554");
+        options.setDeviceName("IRLJ6HV87P9X4TUK");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
 
