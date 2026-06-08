@@ -48,14 +48,19 @@ public class DeleteTaskPage {
     {
         Wait.until(ExpectedConditions.visibilityOfElementLocated(ConfirmDeleteLocator)).click();
     }
-    public void WaitUntilTaskDeleted()
+    public void WaitUntilTaskDeleted(String taskName)
     {
-        Wait.until(
-                ExpectedConditions.invisibilityOfElementLocated(DeletedTaskLocator));
+        By locator = By.xpath("//android.widget.TextView[@text='" + taskName + "']");
+        Wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
     public boolean IsDeletedTaskPresent(String taskName)
     {
         By taskLocator = By.xpath("//android.widget.TextView[@text='" + taskName + "']");
-        return MyApp.findElements(taskLocator).size() > 0;
+        try {
+            MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            return MyApp.findElements(taskLocator).size() > 0;
+        } finally {
+            MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        }
     }
 }

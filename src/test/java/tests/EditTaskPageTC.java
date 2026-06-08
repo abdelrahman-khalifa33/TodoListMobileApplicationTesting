@@ -14,6 +14,7 @@ public class EditTaskPageTC extends BaseTest{
     @BeforeMethod
     public void VerifyThatUserCanAddANewTask()
     {
+        HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
         MyAddTaskPage.EnterTaskTitle("Hello My World");
@@ -26,6 +27,7 @@ public class EditTaskPageTC extends BaseTest{
     @Test
     public void VerifyThatUserCanEditExistingTask()
     {
+        HandleAdIfPresent();
         MyEditTaskPage = new EditTaskPage(MyApp);
         MyEditTaskPage.ClickOnEditButton();
         MyEditTaskPage.ClickOnEditListButton();

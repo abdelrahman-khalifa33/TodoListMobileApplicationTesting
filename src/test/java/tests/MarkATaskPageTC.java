@@ -15,6 +15,7 @@ public class MarkATaskPageTC extends BaseTest{
     @BeforeMethod
     public void CreateTask()
     {
+        HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
 
         MyAddTaskPage.ClickOnAddTaskButton();
@@ -26,6 +27,7 @@ public class MarkATaskPageTC extends BaseTest{
     @Test
     public void VerifyThatUserCanMarkATaskAsCompleted()
     {
+        HandleAdIfPresent();
         MyMarkATaskPage = new MarkATaskPage(MyApp);
 
         String TaskName = "Automation Tasks";

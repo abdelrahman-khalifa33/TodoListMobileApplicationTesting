@@ -55,4 +55,10 @@ public class EditTaskPage {
         return Wait.until(ExpectedConditions.visibilityOfElementLocated(TaskAfterEditLocator)).getText();
     }
 
+    public boolean IsUpdatedTaskDisplayed(String updatedTitle)
+    {
+        By specificTask = By.xpath("//android.widget.TextView[@text='" + updatedTitle + "']");
+        return Wait.until(ExpectedConditions.visibilityOfElementLocated(specificTask)).isDisplayed();
+    }
+
 }

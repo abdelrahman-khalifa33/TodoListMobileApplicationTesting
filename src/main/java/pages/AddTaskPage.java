@@ -15,7 +15,7 @@ public class AddTaskPage {
     public final By AddTaskLocator = By.id("com.splendapps.splendo:id/fab_add_task");
     public final By TaskTitleLocator = By.id("com.splendapps.splendo:id/edtTaskName");
     public final By TaskListLocator = By.id("com.splendapps.splendo:id/spinnerLists");
-    public final By NameOfTaskLocator = By.xpath("//android.widget.TextView[@text=\"العمل\"]");
+    public final By NameOfTaskLocator = By.xpath("//android.widget.TextView[@text=\"Work\"]");
     public final By SaveButtonLocator = By.id("com.splendapps.splendo:id/fab_save");
     public final By TaskLocator = By.xpath("//android.widget.TextView[@resource-id=\"com.splendapps.splendo:id/task_name\" and @text=\"Hello My World\"]");
 
@@ -36,9 +36,10 @@ public class AddTaskPage {
     public void ClickOnSelectTaskDescription()
     {
         Wait.until(ExpectedConditions.elementToBeClickable(TaskListLocator)).click();
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
     }
     public void ClickOnNameOfTaskDescription() {
-        Wait.until(ExpectedConditions.elementToBeClickable(NameOfTaskLocator)).click();
+        Wait.until(ExpectedConditions.visibilityOfElementLocated(NameOfTaskLocator)).click();
     }
     public void ClickOnSaveButton()
     {

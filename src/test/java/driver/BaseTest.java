@@ -17,27 +17,40 @@ public class BaseTest {
         UiAutomator2Options options = new UiAutomator2Options();
 
         options.setPlatformName("Android");
-        options.setPlatformVersion("16");
         options.setAutomationName("UiAutomator2");
         options.setAppPackage("com.splendapps.splendo");
         options.setAppActivity("com.splendapps.splendo.activity.MainActivity");
-        options.setDeviceName("IRLJ6HV87P9X4TUK");
+        options.setDeviceName("RK8TC03SMBK");
         options.setNoReset(true);
 
         MyApp = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
-        MyApp.activateApp("com.splendapps.splendo");
         MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        MyApp.terminateApp("com.splendapps.splendo");
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        MyApp.activateApp("com.splendapps.splendo");
+        HandleAdIfPresent();
     }
 
     public void HandleAdIfPresent()
     {
+        By[] adCloseLocators = {
+            By.id("com.google.android.gms:id/close_button"),
+            By.xpath("//*[@content-desc='Close ad']"),
+            By.xpath("//*[@content-desc='close_button']"),
+            By.id("com.android.vending:id/close_button")
+        };
         try {
-            By closeBtn = By.id("close");
-            if (MyApp.findElements(closeBtn).size() > 0) {
-                MyApp.findElement(closeBtn).click();
+            MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            for (By locator : adCloseLocators) {
+                if (MyApp.findElements(locator).size() > 0) {
+                    MyApp.findElement(locator).click();
+                    return;
+                }
             }
         } catch (Exception e) {
-            // ignore if no ad
+            // No ad present, continue
+        } finally {
+            MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         }
     }
 }

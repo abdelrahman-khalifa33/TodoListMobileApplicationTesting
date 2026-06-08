@@ -17,6 +17,7 @@ public class DeleteTaskPageTC extends BaseTest{
     @BeforeMethod
     public void CreateTask()
     {
+        HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
         MyAddTaskPage.EnterTaskTitle("Hello My World");
@@ -28,11 +29,12 @@ public class DeleteTaskPageTC extends BaseTest{
 
     @Test
     public void VerifyThatUserCanDeleteTask() throws InterruptedException {
+        HandleAdIfPresent();
         MyDeleteTaskPage = new DeleteTaskPage(MyApp);
         MyDeleteTaskPage.LongPressOnTask();
         MyDeleteTaskPage.ClickOnDeleteButton();
         MyDeleteTaskPage.ClickOnConfirmDeleteButton();
-        MyDeleteTaskPage.WaitUntilTaskDeleted();
+        MyDeleteTaskPage.WaitUntilTaskDeleted("Hello My World");
         Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Hello My World"));
     }
 }

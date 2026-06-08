@@ -1,8 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression Suite" verbose="1">
+<suite name="Regression Suite" verbose="1" preserve-order="true">
+
     <test name="Regression Tests">
         <classes>
-            <!-- Add your test classes here -->
+            <class name="tests.RegressionTest"/>
         </classes>
     </test>
+
 </suite>

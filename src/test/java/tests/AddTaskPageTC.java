@@ -12,6 +12,7 @@ public class AddTaskPageTC extends BaseTest {
     @Test
     public void VerifyThatUserCanAddANewTask()
     {
+        HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
         MyAddTaskPage.EnterTaskTitle("Hello My World");
