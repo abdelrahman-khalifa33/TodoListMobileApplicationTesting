@@ -20,7 +20,7 @@ public class BaseTest {
         options.setAutomationName("UiAutomator2");
         options.setAppPackage("com.splendapps.splendo");
         options.setAppActivity("com.splendapps.splendo.activity.MainActivity");
-        options.setDeviceName("RK8TC03SMBK");
+        options.setDeviceName("IRLJ6HV87P9X4TUK");
         options.setNoReset(true);
 
         MyApp = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
