@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class RegressionTest extends BaseTest {
+public class RegressionTC extends BaseTest {
 
     // ─────────────────────────────────────────────────────────────────────────
     // Single session lifecycle — app opens once, stays open for all 7 tests
