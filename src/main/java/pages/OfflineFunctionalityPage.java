@@ -42,7 +42,8 @@ public class OfflineFunctionalityPage {
     {
         Wait.until(ExpectedConditions.elementToBeClickable(SaveButtonLocator)).click();
     }
-    public boolean IsTaskDisplayed(String taskName) {
+    public boolean IsTaskDisplayed(String taskName)
+    {
         By taskLocator = By.xpath(
                 "//android.widget.TextView[@resource-id='com.splendapps.splendo:id/task_name' and @text='" + taskName + "']");
         return Wait.until(ExpectedConditions.visibilityOfElementLocated(taskLocator)).isDisplayed();

@@ -1,8 +1,6 @@
 package tests;
 
 import driver.BaseTest;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,11 +18,10 @@ public class DeleteTaskPageTC extends BaseTest{
         HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
-        MyAddTaskPage.EnterTaskTitle("Hello My World");
+        MyAddTaskPage.EnterTaskTitle("Deleted Task");
         MyAddTaskPage.ClickOnSelectTaskDescription();
         MyAddTaskPage.ClickOnNameOfTaskDescription();
         MyAddTaskPage.ClickOnSaveButton();
-
     }
 
     @Test
@@ -34,7 +31,8 @@ public class DeleteTaskPageTC extends BaseTest{
         MyDeleteTaskPage.LongPressOnTask();
         MyDeleteTaskPage.ClickOnDeleteButton();
         MyDeleteTaskPage.ClickOnConfirmDeleteButton();
-        MyDeleteTaskPage.WaitUntilTaskDeleted("Hello My World");
-        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Hello My World"));
+        MyDeleteTaskPage.WaitUntilTaskDeleted("Deleted Task");
+        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Hello My World") ,
+                "Scenario 3 FAILED: Task still present after deletion.");
     }
 }

@@ -19,7 +19,7 @@ public class EditTaskPage {
     public final By EditTaskLocator = By.id("com.splendapps.splendo:id/task_name");
     public final By EditAndNewTitleLocator = By.id("com.splendapps.splendo:id/edtTaskName");
     public final By SaveEditButton = By.id("com.splendapps.splendo:id/fab_save");
-    public final By TaskAfterEditLocator = By.id("com.splendapps.splendo:id/task_name");
+
 
     public EditTaskPage(AndroidDriver MyAPP)
     {
@@ -50,11 +50,6 @@ public class EditTaskPage {
     {
         Wait.until(ExpectedConditions.elementToBeClickable(SaveEditButton)).click();
     }
-    public String GetTaskName()
-    {
-        return Wait.until(ExpectedConditions.visibilityOfElementLocated(TaskAfterEditLocator)).getText();
-    }
-
     public boolean IsUpdatedTaskDisplayed(String updatedTitle)
     {
         By specificTask = By.xpath("//android.widget.TextView[@text='" + updatedTitle + "']");

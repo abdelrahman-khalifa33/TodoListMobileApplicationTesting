@@ -5,7 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.AddTaskPage;
 
-public class AddTaskPageTC extends BaseTest {
+public class AddTaskPageTC extends BaseTest
+{
 
     AddTaskPage MyAddTaskPage;
 
@@ -19,6 +20,7 @@ public class AddTaskPageTC extends BaseTest {
         MyAddTaskPage.ClickOnSelectTaskDescription();
         MyAddTaskPage.ClickOnNameOfTaskDescription();
         MyAddTaskPage.ClickOnSaveButton();
-        Assert.assertTrue(MyAddTaskPage.IsTaskDisPlayed());
+        Assert.assertTrue(MyAddTaskPage.IsTaskDisPlayed() ,
+                "Scenario 1 FAILED: Task was not displayed after adding.");
     }
 }

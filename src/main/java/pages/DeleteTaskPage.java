@@ -18,7 +18,6 @@ public class DeleteTaskPage {
 
     public final By TaskLocator = By.id("com.splendapps.splendo:id/task_name");
     public final By DeleteButtonLocator = By.id("com.splendapps.splendo:id/action_delete");
-    public final By DeletedTaskLocator = By.xpath("//android.widget.TextView[@text='Hello My World']");
     public final By ConfirmDeleteLocator = By.id("android:id/button1");
 
     public DeleteTaskPage(AndroidDriver MyAPP)
@@ -56,10 +55,13 @@ public class DeleteTaskPage {
     public boolean IsDeletedTaskPresent(String taskName)
     {
         By taskLocator = By.xpath("//android.widget.TextView[@text='" + taskName + "']");
-        try {
+        try
+        {
             MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
             return MyApp.findElements(taskLocator).size() > 0;
-        } finally {
+        }
+        finally
+        {
             MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         }
     }

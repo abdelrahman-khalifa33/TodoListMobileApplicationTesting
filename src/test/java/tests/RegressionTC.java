@@ -1,55 +1,20 @@
 package tests;
 
 import driver.BaseTest;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import io.appium.java_client.android.options.UiAutomator2Options;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.*;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 public class RegressionTC extends BaseTest {
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // Single session lifecycle — app opens once, stays open for all 7 tests
-    // ─────────────────────────────────────────────────────────────────────────
-
-    @BeforeClass
-    public void setupSession() throws MalformedURLException {
-        UiAutomator2Options options = new UiAutomator2Options();
-        options.setPlatformName("Android");
-        options.setAutomationName("UiAutomator2");
-        options.setAppPackage("com.splendapps.splendo");
-        options.setAppActivity("com.splendapps.splendo.activity.MainActivity");
-        options.setDeviceName("RK8TC03SMBK");
-        options.setNoReset(true);
-
-        MyApp = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
-        MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        MyApp.terminateApp("com.splendapps.splendo");
-        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
-        MyApp.activateApp("com.splendapps.splendo");
-        HandleAdIfPresent();
-    }
-
-    /** Disable parent's per-test driver restart — session is shared */
-    @Override
-    @BeforeMethod
-    public void Setup() {
-        // intentionally empty
-    }
-
     /** Press back until the main screen FAB is visible — app stays open the whole time */
     @AfterMethod
-    public void returnToMainScreen() {
+    public void ReturnToMainScreen()
+    {
         try {
             By fabLocator = By.id("com.splendapps.splendo:id/fab_add_task");
             MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
@@ -66,7 +31,7 @@ public class RegressionTC extends BaseTest {
     }
 
     @AfterClass
-    public void tearDownSession() {
+    public void TearDownSession() {
         if (MyApp != null) MyApp.quit();
     }
 
@@ -74,15 +39,16 @@ public class RegressionTC extends BaseTest {
     // Scenario 1: Verify That User Can Add a New Task
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 1, description = "Scenario 1: Verify That User Can Add a New Task")
-    public void verifyThatUserCanAddANewTask() {
+    public void verifyThatUserCanAddANewTask()
+    {
         HandleAdIfPresent();
-        AddTaskPage addTaskPage = new AddTaskPage(MyApp);
-        addTaskPage.ClickOnAddTaskButton();
-        addTaskPage.EnterTaskTitle("Hello My World");
-        addTaskPage.ClickOnSelectTaskDescription();
-        addTaskPage.ClickOnNameOfTaskDescription();
-        addTaskPage.ClickOnSaveButton();
-        Assert.assertTrue(addTaskPage.IsTaskDisPlayed(),
+        AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
+        MyAddTaskPage.ClickOnAddTaskButton();
+        MyAddTaskPage.EnterTaskTitle("Hello My World");
+        MyAddTaskPage.ClickOnSelectTaskDescription();
+        MyAddTaskPage.ClickOnNameOfTaskDescription();
+        MyAddTaskPage.ClickOnSaveButton();
+        Assert.assertTrue(MyAddTaskPage.IsTaskDisPlayed(),
                 "Scenario 1 FAILED: Task was not displayed after adding.");
     }
 
@@ -90,25 +56,26 @@ public class RegressionTC extends BaseTest {
     // Scenario 2: Verify That User Can Edit an Existing Task
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 2, description = "Scenario 2: Verify That User Can Edit an Existing Task")
-    public void verifyThatUserCanEditExistingTask() {
+    public void verifyThatUserCanEditExistingTask()
+    {
         HandleAdIfPresent();
-        AddTaskPage addTaskPage = new AddTaskPage(MyApp);
-        addTaskPage.ClickOnAddTaskButton();
-        addTaskPage.EnterTaskTitle("Hello My World");
-        addTaskPage.ClickOnSelectTaskDescription();
-        addTaskPage.ClickOnNameOfTaskDescription();
-        addTaskPage.ClickOnSaveButton();
+        AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
+        MyAddTaskPage.ClickOnAddTaskButton();
+        MyAddTaskPage.EnterTaskTitle("Hello My World");
+        MyAddTaskPage.ClickOnSelectTaskDescription();
+        MyAddTaskPage.ClickOnNameOfTaskDescription();
+        MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
-        EditTaskPage editTaskPage = new EditTaskPage(MyApp);
-        editTaskPage.ClickOnEditButton();
-        editTaskPage.ClickOnEditListButton();
-        editTaskPage.SelectTaskToEdit();
-        editTaskPage.ClickOnTaskToEdit();
-        editTaskPage.UpdateTaskTitle("Tasks Today");
-        editTaskPage.ClickOnSaveEditButton();
+        EditTaskPage MyEditTaskPage = new EditTaskPage(MyApp);
+        MyEditTaskPage.ClickOnEditButton();
+        MyEditTaskPage.ClickOnEditListButton();
+        MyEditTaskPage.SelectTaskToEdit();
+        MyEditTaskPage.ClickOnTaskToEdit();
+        MyEditTaskPage.UpdateTaskTitle("Tasks Today");
+        MyEditTaskPage.ClickOnSaveEditButton();
 
-        Assert.assertTrue(editTaskPage.IsUpdatedTaskDisplayed("Tasks Today"),
+        Assert.assertTrue(MyEditTaskPage.IsUpdatedTaskDisplayed("Tasks Today"),
                 "Scenario 2 FAILED: Task title was not updated correctly.");
     }
 
@@ -116,22 +83,23 @@ public class RegressionTC extends BaseTest {
     // Scenario 3: Verify That User Can Delete a Task
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 3, description = "Scenario 3: Verify That User Can Delete a Task")
-    public void verifyThatUserCanDeleteTask() throws InterruptedException {
+    public void verifyThatUserCanDeleteTask() throws InterruptedException
+    {
         HandleAdIfPresent();
-        AddTaskPage addTaskPage = new AddTaskPage(MyApp);
-        addTaskPage.ClickOnAddTaskButton();
-        addTaskPage.EnterTaskTitle("Deleted Task");
-        addTaskPage.ClickOnSelectTaskDescription();
-        addTaskPage.ClickOnNameOfTaskDescription();
-        addTaskPage.ClickOnSaveButton();
+        AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
+        MyAddTaskPage.ClickOnAddTaskButton();
+        MyAddTaskPage.EnterTaskTitle("Deleted Task");
+        MyAddTaskPage.ClickOnSelectTaskDescription();
+        MyAddTaskPage.ClickOnNameOfTaskDescription();
+        MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
-        DeleteTaskPage deleteTaskPage = new DeleteTaskPage(MyApp);
-        deleteTaskPage.LongPressOnTask();
-        deleteTaskPage.ClickOnDeleteButton();
-        deleteTaskPage.ClickOnConfirmDeleteButton();
-        deleteTaskPage.WaitUntilTaskDeleted("Deleted Task");
-        Assert.assertFalse(deleteTaskPage.IsDeletedTaskPresent("Deleted Task"),
+        DeleteTaskPage MyDeleteTaskPage = new DeleteTaskPage(MyApp);
+        MyDeleteTaskPage.LongPressOnTask();
+        MyDeleteTaskPage.ClickOnDeleteButton();
+        MyDeleteTaskPage.ClickOnConfirmDeleteButton();
+        MyDeleteTaskPage.WaitUntilTaskDeleted("Deleted Task");
+        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Deleted Task"),
                 "Scenario 3 FAILED: Task still present after deletion.");
     }
 
@@ -139,22 +107,23 @@ public class RegressionTC extends BaseTest {
     // Scenario 4: Verify That User Can Mark a Task as Completed
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 4, description = "Scenario 4: Verify That User Can Mark a Task as Completed")
-    public void verifyThatUserCanMarkATaskAsCompleted() {
+    public void verifyThatUserCanMarkATaskAsCompleted()
+    {
         HandleAdIfPresent();
-        AddTaskPage addTaskPage = new AddTaskPage(MyApp);
-        addTaskPage.ClickOnAddTaskButton();
-        addTaskPage.EnterTaskTitle("Automation Tasks");
-        addTaskPage.ClickOnSelectTaskDescription();
-        addTaskPage.ClickOnNameOfTaskDescription();
-        addTaskPage.ClickOnSaveButton();
+        AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
+        MyAddTaskPage.ClickOnAddTaskButton();
+        MyAddTaskPage.EnterTaskTitle("Automation Tasks");
+        MyAddTaskPage.ClickOnSelectTaskDescription();
+        MyAddTaskPage.ClickOnNameOfTaskDescription();
+        MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
-        MarkATaskPage markATaskPage = new MarkATaskPage(MyApp);
+        MarkATaskPage MyMarkATaskPage = new MarkATaskPage(MyApp);
         String taskName = "Automation Tasks";
-        markATaskPage.ClickTaskCheckbox(taskName);
-        markATaskPage.ClickOnBurgerButton();
-        markATaskPage.OpenFinishedTasks();
-        Assert.assertTrue(markATaskPage.IsTaskPresentInFinished(taskName),
+        MyMarkATaskPage.ClickTaskCheckbox(taskName);
+        MyMarkATaskPage.ClickOnBurgerButton();
+        MyMarkATaskPage.OpenFinishedTasks();
+        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(taskName),
                 "Scenario 4 FAILED: Task was not found in Finished tasks.");
     }
 
@@ -162,22 +131,23 @@ public class RegressionTC extends BaseTest {
     // Scenario 5: Automate Filtering Completed Tasks
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 5, description = "Scenario 5: Automate Filtering Completed Tasks")
-    public void verifyFilteringCompletedTasks() {
+    public void verifyFilteringCompletedTasks()
+    {
         HandleAdIfPresent();
-        AddTaskPage addTaskPage = new AddTaskPage(MyApp);
-        addTaskPage.ClickOnAddTaskButton();
-        addTaskPage.EnterTaskTitle("Filter Task Test");
-        addTaskPage.ClickOnSelectTaskDescription();
-        addTaskPage.ClickOnNameOfTaskDescription();
-        addTaskPage.ClickOnSaveButton();
+        AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
+        MyAddTaskPage.ClickOnAddTaskButton();
+        MyAddTaskPage.EnterTaskTitle("Filter Task Test");
+        MyAddTaskPage.ClickOnSelectTaskDescription();
+        MyAddTaskPage.ClickOnNameOfTaskDescription();
+        MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
-        MarkATaskPage markATaskPage = new MarkATaskPage(MyApp);
+        MarkATaskPage MyMarkATaskPage = new MarkATaskPage(MyApp);
         String taskName = "Filter Task Test";
-        markATaskPage.ClickTaskCheckbox(taskName);
-        markATaskPage.ClickOnBurgerButton();
-        markATaskPage.OpenFinishedTasks();
-        Assert.assertTrue(markATaskPage.IsTaskPresentInFinished(taskName),
+        MyMarkATaskPage.ClickTaskCheckbox(taskName);
+        MyMarkATaskPage.ClickOnBurgerButton();
+        MyMarkATaskPage.OpenFinishedTasks();
+        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(taskName),
                 "Scenario 5 FAILED: Completed task not visible in Finished filter.");
     }
 
@@ -185,15 +155,17 @@ public class RegressionTC extends BaseTest {
     // Bonus Scenario 2: Verify App Performance Under Continuous Task Creation
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 6, description = "Bonus Scenario 2: Verify App Performance Under Continuous Task Creation")
-    public void verifyAppPerformanceUnderHeavyTaskCreation() throws InterruptedException {
+    public void verifyAppPerformanceUnderHeavyTaskCreation() throws InterruptedException
+    {
         HandleAdIfPresent();
-        PerformancePage performancePage = new PerformancePage(MyApp);
+        PerformancePage MyPerformancePage = new PerformancePage(MyApp);
         int numberOfTasks = 10;
         long startTime = System.currentTimeMillis();
 
-        for (int i = 1; i <= numberOfTasks; i++) {
+        for (int i = 1; i <= numberOfTasks; i++)
+        {
             String taskName = "Performance Task : " + i;
-            performancePage.CreateTaskFast(taskName);
+            MyPerformancePage.CreateTaskFast(taskName);
             Thread.sleep(800);
             System.out.println("Created: " + taskName);
         }
@@ -201,7 +173,7 @@ public class RegressionTC extends BaseTest {
         long totalTime = System.currentTimeMillis() - startTime;
         System.out.println("Total time for " + numberOfTasks + " tasks = " + totalTime + " ms");
 
-        Assert.assertTrue(performancePage.IsAppStable(),
+        Assert.assertTrue(MyPerformancePage.IsAppStable(),
                 "Bonus Scenario 2 FAILED: App is not stable after load test.");
     }
 
@@ -209,7 +181,8 @@ public class RegressionTC extends BaseTest {
     // Bonus Scenario 6: Validate Offline Functionality
     // ─────────────────────────────────────────────────────────────────────────
     @Test(priority = 7, description = "Bonus Scenario 6: Validate Offline Functionality")
-    public void verifyThatUserCanAddANewTaskWhenNoInternetConnection() {
+    public void verifyThatUserCanAddANewTaskWhenNoInternetConnection()
+    {
         HandleAdIfPresent();
         OfflineFunctionalityPage offlinePage = new OfflineFunctionalityPage(MyApp);
         String taskName = "Hello My World";

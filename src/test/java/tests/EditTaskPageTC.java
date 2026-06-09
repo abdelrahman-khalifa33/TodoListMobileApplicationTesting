@@ -33,12 +33,11 @@ public class EditTaskPageTC extends BaseTest{
         MyEditTaskPage.ClickOnEditListButton();
         MyEditTaskPage.SelectTaskToEdit();
         MyEditTaskPage.ClickOnTaskToEdit();
-
         MyEditTaskPage.UpdateTaskTitle("Tasks Today");
         MyEditTaskPage.ClickOnSaveEditButton();
 
-        String ActualTitle = MyEditTaskPage.GetTaskName();
-        Assert.assertEquals(ActualTitle , "Tasks Today");
+        Assert.assertTrue(MyEditTaskPage.IsUpdatedTaskDisplayed("Tasks Today") ,
+                "Scenario 2 FAILED: Task title was not updated correctly.");
     }
 
 }

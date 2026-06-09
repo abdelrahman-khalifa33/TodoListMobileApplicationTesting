@@ -32,15 +32,8 @@ public class PerformancePage {
         try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
         Wait.until(ExpectedConditions.visibilityOfElementLocated(NameOfTaskLocator)).click();
         Wait.until(ExpectedConditions.elementToBeClickable(SaveButtonLocator)).click();
-
-//        Wait.until(ExpectedConditions.invisibilityOf(SaveButtonLocator));
     }
 
-    public boolean IsTaskDisplayed(String taskName) {
-        By taskLocator = By.xpath(
-                "//android.widget.TextView[@resource-id='com.splendapps.splendo:id/task_name' and @text='" + taskName + "']");
-        return Wait.until(ExpectedConditions.visibilityOfElementLocated(taskLocator)).isDisplayed();
-    }
     public boolean IsAppStable()
     {
         return !MyApp.getPageSource().toLowerCase().contains("error");

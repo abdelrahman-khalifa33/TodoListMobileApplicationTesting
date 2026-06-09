@@ -2,6 +2,7 @@ package driver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,7 +12,7 @@ public class BaseTest {
 
     protected AndroidDriver MyApp;
 
-    @BeforeMethod
+    @BeforeClass
     public void Setup() throws MalformedURLException
     {
         UiAutomator2Options options = new UiAutomator2Options();

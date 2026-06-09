@@ -29,12 +29,11 @@ public class MarkATaskPageTC extends BaseTest{
     {
         HandleAdIfPresent();
         MyMarkATaskPage = new MarkATaskPage(MyApp);
-
         String TaskName = "Automation Tasks";
-
         MyMarkATaskPage.ClickTaskCheckbox(TaskName);
         MyMarkATaskPage.ClickOnBurgerButton();
         MyMarkATaskPage.OpenFinishedTasks();
-        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(TaskName));
+        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(TaskName) ,
+                "Scenario 4 FAILED: Task was not found in Finished tasks.");
     }
 }
