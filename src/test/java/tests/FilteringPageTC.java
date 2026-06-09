@@ -1,26 +1,23 @@
 package tests;
 
 import driver.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AddTaskPage;
+import pages.FilteringPage;
 import pages.MarkATaskPage;
 
-public class MarkATaskPageTC extends BaseTest{
+public class FilteringPageTC extends BaseTest{
 
     AddTaskPage MyAddTaskPage;
-    MarkATaskPage MyMarkATaskPage;
+    FilteringPage MyFilteringPage;
 
     @BeforeMethod
     public void CreateTask()
     {
         HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
-
         MyAddTaskPage.ClickOnAddTaskButton();
         MyAddTaskPage.EnterTaskTitle("Automation Tasks");
         MyAddTaskPage.ClickOnSelectTaskDescription();
@@ -31,11 +28,14 @@ public class MarkATaskPageTC extends BaseTest{
     public void VerifyThatUserCanMarkATaskAsCompleted()
     {
         HandleAdIfPresent();
-        MyMarkATaskPage = new MarkATaskPage(MyApp);
-        String TaskName = "Automation Tasks";
-        MyMarkATaskPage.ClickTaskCheckbox(TaskName);
-        By Checkbox = By.xpath("//android.widget.TextView[@text='" + TaskName +
-                        "']/ancestor::android.view.ViewGroup//android.widget.CheckBox");
-        Assert.assertEquals(MyApp.findElements(Checkbox).size(), 0);
+        MyFilteringPage = new FilteringPage(MyApp);
+
+        String taskName = "Automation Tasks";
+
+        MyFilteringPage.ClickTaskCheckbox(taskName);
+        MyFilteringPage.ClickOnBurgerButton();
+        MyFilteringPage.OpenFinishedTasks();
+        Assert.assertTrue(MyFilteringPage.IsTaskPresentInFinished(taskName),
+                "Scenario 5 FAILED: Completed task not visible in Finished filter.");
     }
 }

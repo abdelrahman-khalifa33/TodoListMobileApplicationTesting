@@ -119,12 +119,11 @@ public class RegressionTC extends BaseTest {
 
         HandleAdIfPresent();
         MarkATaskPage MyMarkATaskPage = new MarkATaskPage(MyApp);
-        String taskName = "Automation Tasks";
-        MyMarkATaskPage.ClickTaskCheckbox(taskName);
-        MyMarkATaskPage.ClickOnBurgerButton();
-        MyMarkATaskPage.OpenFinishedTasks();
-        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(taskName),
-                "Scenario 4 FAILED: Task was not found in Finished tasks.");
+        String TaskName = "Automation Tasks";
+        MyMarkATaskPage.ClickTaskCheckbox(TaskName);
+        By Checkbox = By.xpath("//android.widget.TextView[@text='" + TaskName +
+                "']/ancestor::android.view.ViewGroup//android.widget.CheckBox");
+        Assert.assertEquals(MyApp.findElements(Checkbox).size(), 0);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -142,12 +141,12 @@ public class RegressionTC extends BaseTest {
         MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
-        MarkATaskPage MyMarkATaskPage = new MarkATaskPage(MyApp);
+        FilteringPage MyFilteringPage = new FilteringPage(MyApp);
         String taskName = "Filter Task Test";
-        MyMarkATaskPage.ClickTaskCheckbox(taskName);
-        MyMarkATaskPage.ClickOnBurgerButton();
-        MyMarkATaskPage.OpenFinishedTasks();
-        Assert.assertTrue(MyMarkATaskPage.IsTaskPresentInFinished(taskName),
+        MyFilteringPage.ClickTaskCheckbox(taskName);
+        MyFilteringPage.ClickOnBurgerButton();
+        MyFilteringPage.OpenFinishedTasks();
+        Assert.assertTrue(MyFilteringPage.IsTaskPresentInFinished(taskName),
                 "Scenario 5 FAILED: Completed task not visible in Finished filter.");
     }
 
