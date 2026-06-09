@@ -24,8 +24,12 @@ public class RegressionTC extends BaseTest {
                 Thread.sleep(500);
             }
             HandleAdIfPresent();
-        } catch (Exception ignored) {
-        } finally {
+        }
+        catch (Exception ignored)
+        {
+        }
+        finally
+        {
             MyApp.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         }
     }
@@ -61,7 +65,7 @@ public class RegressionTC extends BaseTest {
         HandleAdIfPresent();
         AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
-        MyAddTaskPage.EnterTaskTitle("Hello My World");
+        MyAddTaskPage.EnterTaskTitle("Task_");
         MyAddTaskPage.ClickOnSelectTaskDescription();
         MyAddTaskPage.ClickOnNameOfTaskDescription();
         MyAddTaskPage.ClickOnSaveButton();
@@ -88,18 +92,18 @@ public class RegressionTC extends BaseTest {
         HandleAdIfPresent();
         AddTaskPage MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
-        MyAddTaskPage.EnterTaskTitle("Deleted Task");
+        MyAddTaskPage.EnterTaskTitle("Delete Task");
         MyAddTaskPage.ClickOnSelectTaskDescription();
         MyAddTaskPage.ClickOnNameOfTaskDescription();
         MyAddTaskPage.ClickOnSaveButton();
 
         HandleAdIfPresent();
         DeleteTaskPage MyDeleteTaskPage = new DeleteTaskPage(MyApp);
-        MyDeleteTaskPage.LongPressOnTask();
+        MyDeleteTaskPage.LongPressOnTask("Delete Task");
         MyDeleteTaskPage.ClickOnDeleteButton();
         MyDeleteTaskPage.ClickOnConfirmDeleteButton();
-        MyDeleteTaskPage.WaitUntilTaskDeleted("Deleted Task");
-        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Deleted Task"),
+        MyDeleteTaskPage.WaitUntilTaskDeleted("Delete Task");
+        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Delete Task"),
                 "Scenario 3 FAILED: Task still present after deletion.");
     }
 

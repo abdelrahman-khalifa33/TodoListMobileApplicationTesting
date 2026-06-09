@@ -15,7 +15,7 @@ public class EditTaskPage {
 
     public final By EditButtonLocator = By.className("android.widget.ImageButton");
     public final By EditListButtonLocator = By.id("com.splendapps.splendo:id/edit_lists");
-    public final By TaskLocator = By.xpath("(//android.widget.LinearLayout[@resource-id=\"com.splendapps.splendo:id/lay_task_list\"])[5]/android.widget.LinearLayout[1]");
+    public final By TaskLocator = By.xpath("(//android.widget.LinearLayout[@resource-id=\"com.splendapps.splendo:id/lay_task_list\"])[2]/android.widget.LinearLayout[1]");
     public final By EditTaskLocator = By.id("com.splendapps.splendo:id/task_name");
     public final By EditAndNewTitleLocator = By.id("com.splendapps.splendo:id/edtTaskName");
     public final By SaveEditButton = By.id("com.splendapps.splendo:id/fab_save");

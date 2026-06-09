@@ -26,7 +26,7 @@ public class DeleteTaskPage {
         Wait = new WebDriverWait(MyAPP, Duration.ofSeconds(10));
     }
 
-    public void LongPressOnTask() {
+    public void LongPressOnTask(String taskName) {
         WebElement Task =
                 Wait.until(ExpectedConditions.visibilityOfElementLocated(TaskLocator));
 

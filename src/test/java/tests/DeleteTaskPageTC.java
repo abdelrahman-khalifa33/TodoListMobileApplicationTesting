@@ -18,7 +18,7 @@ public class DeleteTaskPageTC extends BaseTest{
         HandleAdIfPresent();
         MyAddTaskPage = new AddTaskPage(MyApp);
         MyAddTaskPage.ClickOnAddTaskButton();
-        MyAddTaskPage.EnterTaskTitle("Deleted Task");
+        MyAddTaskPage.EnterTaskTitle("Delete Task");
         MyAddTaskPage.ClickOnSelectTaskDescription();
         MyAddTaskPage.ClickOnNameOfTaskDescription();
         MyAddTaskPage.ClickOnSaveButton();
@@ -28,11 +28,11 @@ public class DeleteTaskPageTC extends BaseTest{
     public void VerifyThatUserCanDeleteTask() throws InterruptedException {
         HandleAdIfPresent();
         MyDeleteTaskPage = new DeleteTaskPage(MyApp);
-        MyDeleteTaskPage.LongPressOnTask();
+        MyDeleteTaskPage.LongPressOnTask("Delete Task");
         MyDeleteTaskPage.ClickOnDeleteButton();
         MyDeleteTaskPage.ClickOnConfirmDeleteButton();
-        MyDeleteTaskPage.WaitUntilTaskDeleted("Deleted Task");
-        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Hello My World") ,
+        MyDeleteTaskPage.WaitUntilTaskDeleted("Delete Task");
+        Assert.assertFalse(MyDeleteTaskPage.IsDeletedTaskPresent("Delete Task") ,
                 "Scenario 3 FAILED: Task still present after deletion.");
     }
 }
